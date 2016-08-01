@@ -59,9 +59,9 @@ while(True):
                 name = b_pkg.split("-" + cur_pkg.p_ver)[0]
                 for i_pkg in pkgs:
                     if(i_pkg.p_name == name):
-                        rmpkglist.append(i_pkg)
+                        rmpkglst.append(i_pkg)
                 for rmpkg in rmpkglst:
-                    built_pkgs.remove(rmpkg)
+                    pkgs.remove(rmpkg)
         os.chdir(PWD)
     else:
         os.chdir(PWD)
