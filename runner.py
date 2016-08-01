@@ -53,12 +53,15 @@ while(True):
         queue.put(my_dir_name)
         queue.get()  # Wait for install to finish
         built_pkgs = subprocess.run(["ls"], stdout=subprocess.PIPE, universal_newlines=True).stdout.split(None)
+        rmpkglst = []
         for b_pkg in built_pkgs:
             if(".pkg.tar.xz" in b_pkg):
                 name = b_pkg.split("-" + cur_pkg.p_ver)[0]
                 for i_pkg in pkgs:
                     if(i_pkg.p_name == name):
-                        pkgs.remove(i_pkg)
+                        rmpkglist.append(i_pkg)
+                for rmpkg in rmpkglst:
+                    built_pkgs.remove(rmpkg)
         os.chdir(PWD)
     else:
         os.chdir(PWD)
