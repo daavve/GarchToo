@@ -60,8 +60,8 @@ while(True):
                 for i_pkg in pkgs:
                     if(i_pkg.p_name == name and i_pkg not in rmpkglst):
                         rmpkglst.append(i_pkg)
-                for rmpkg in rmpkglst:
-                    pkgs.remove(rmpkg)
+        for rmpkg in rmpkglst:
+            pkgs.remove(rmpkg)
         os.chdir(PWD)
     else:
         os.chdir(PWD)
