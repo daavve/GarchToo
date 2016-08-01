@@ -38,7 +38,7 @@ for pkg in pkg_list.split("\n"):
         s_name_ver = s_pkg[1].split(" ")
         s_name = s_name_ver[0]
         s_ver  = s_name_ver[1]
-        if("local" not in s_name):
+        if("local" not in s_type and "linux" not in s_name):  #Don't build stull from the AUR or the Kernel
             pkgs.append(Prgram(s_type, s_name, s_ver))
 while(True):
     cur_pkg = pkgs.popleft()
