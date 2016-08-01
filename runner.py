@@ -58,9 +58,8 @@ while(True):
             if(".pkg.tar.xz" in b_pkg):
                 name = b_pkg.split("-" + cur_pkg.p_ver)[0]
                 for i_pkg in pkgs:
-                    if(i_pkg.p_name == name):
-                        if(i_pkg not in rmpkglst):  #Avoid double adding!
-                            rmpkglst.append(i_pkg)
+                    if(i_pkg.p_name == name and i_pkg not in rmpkglst):
+                        rmpkglst.append(i_pkg)
                 for rmpkg in rmpkglst:
                     pkgs.remove(rmpkg)
         os.chdir(PWD)
