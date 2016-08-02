@@ -8,6 +8,7 @@ from multiprocessing.managers import BaseManager
 import queue
 import os
 import subprocess
+import time
 
 PWD = "/home/dave/projects/archtoo.gny"
 queue = queue.Queue()
@@ -25,4 +26,5 @@ while True:
             subprocess.run(["pacman", "-Uv", "--noconfirm", package], universal_newlines=True)
     os.chdir(PWD)
     queue.put("advance") #tells the other process to stop waiting
+    time.sleep(1) #Make sure you don't eat you're own message!
     
