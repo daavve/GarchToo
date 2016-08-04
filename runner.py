@@ -51,6 +51,7 @@ while(True):
     build_results = subprocess.run(["makepkg"])
     if(build_results.returncode == 0):
         queue.put(my_dir_name)
+        time.sleep(1)
         queue.get()  # Wait for install to finish
         built_pkgs = subprocess.run(["ls"], stdout=subprocess.PIPE, universal_newlines=True).stdout.split(None)
         rmpkglst = []
