@@ -20,7 +20,7 @@ m = QueueManager(address=('', 50000), authkey=b'abracadabra')
 m.connect()
 queue = m.get_queue()
 
-PWD = subprocess.run(["pwd"], stdout=subprocess.PIPE, universal_newlines=True).stdout
+PWD = subprocess.run(["pwd"], stdout=subprocess.PIPE, universal_newlines=True).stdout.strip("\n")
 
 
 while(True):

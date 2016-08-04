@@ -10,7 +10,7 @@ import os
 import subprocess
 import time
 
-PWD = subprocess.run(["pwd"], stdout=subprocess.PIPE, universal_newlines=True).stdout
+PWD = subprocess.run(["pwd"], stdout=subprocess.PIPE, universal_newlines=True).stdout.strip("\n")
 queue = queue.Queue()
 class QueueManager(BaseManager): pass
 QueueManager.register('get_queue', callable=lambda:queue)
