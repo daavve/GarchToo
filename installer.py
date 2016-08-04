@@ -10,7 +10,7 @@ import os
 import subprocess
 import time
 
-PWD = "/home/dave/projects/archtoo.gny"
+PWD = subprocess.run(["pwd"], stdout=subprocess.PIPE, universal_newlines=True).stdout
 queue = queue.Queue()
 class QueueManager(BaseManager): pass
 QueueManager.register('get_queue', callable=lambda:queue)

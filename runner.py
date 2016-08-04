@@ -19,7 +19,7 @@ m = QueueManager(address=('', 50000), authkey=b'abracadabra')
 m.connect()
 queue = m.get_queue()
 
-PWD = "/home/dave/projects/archtoo.gny"
+PWD = subprocess.run(["pwd"], stdout=subprocess.PIPE, universal_newlines=True).stdout
 
 
 class Prgram(object):
