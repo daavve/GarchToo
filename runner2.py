@@ -12,7 +12,7 @@ from multiprocessing.managers import BaseManager
 import queue
 import time
 
-f = open("failed2update.txt", "w")
+f = open("failed3update.txt", "w")
 queue = queue.Queue()
 class QueueManager(BaseManager): pass
 QueueManager.register('get_queue', callable=lambda:queue)
@@ -35,8 +35,9 @@ while(True):
     build_results = subprocess.run(["makepkg"], universal_newlines=True)
     os.chdir(PWD)
     queue.put(build_results.returncode)
-    time.sleep(1)
     if(build_results.returncode == 0):
+        queue.push(my_dir_name)
+        time.sleep(1)
         queue.get() # Wait for update to finish
     else:
         f.write(cur_pkg + "\n")
