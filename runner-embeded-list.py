@@ -62,6 +62,7 @@ while(True):
     build_results = subprocess.run(["makepkg"])
     if(build_results.returncode == 0):
         queue.put(my_dir_name)
+        time.sleep(1) # Don't eat your own message
         queue.get()  # Wait for install to finish
         os.chdir(PWD)
     else:
