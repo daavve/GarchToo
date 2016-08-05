@@ -10,7 +10,7 @@
 
 
 
-pkg_list = "linux-api-headers:4.7-1 glibc:2.24-1 alsa-lib:1.1.2-1 binutils:2.26.1-2 gcc-libs:6.1.1-4 device-mapper:2.02.162-1 dhcpcd:6.11.2-1 findutils:4.6.0-2 gawk:4.1.3-2 gcc:6.1.1-4 gcc-ada:6.1.1-4 gcc-fortran:6.1.1-4 gcc-go:6.1.1-4 gcc-objc:6.1.1-4 libksba:1.3.4-2 gpgme:1.6.0-3 groff:1.22.3-7 gtk-update-icon-cache:3.20.6-2 mesa:12.0.1-6 mesa-libgl:12.0.1-6 gtk3:3.20.6-2 guile:2.0.12-1 jre7-openjdk-headless:7.u111_2.6.7-1 jre7-openjdk:7.u111_2.6.7-1 jdk7-openjdk:7.u111_2.6.7-1 libnl:3.2.28-1 libsynctex:2016.41290-2.1 lvm2:2.02.162-1 pacman-mirrorlist:20160802-1 python-beautifulsoup4:4.5.1-1 qt5-base:5.7.0-2 python-matplotlib:1.5.2-1 python-setuptools:1:25.1.3-1 python2-setuptools:1:25.1.3-1 strace:4.13-1 tcl:8.6.6-1 texlive-bin:2016.41290-2.1 texlive-latexextra:2016.41473-2 texlive-pictures:2016.41299-2 tk:8.6.6-1 valgrind:3.11.0-4"
+pkg_list = "curl:7.50.1-1 fakeroot:1.21-2 fontconfig:2.12.1-1 gpm:1.20.7-7 gtk-update-icon-cache:3.20.8-1 libcups:2.1.4-2 gtk3:3.20.8-1 inetutils:1.9.4-4 libinput:1.4.1-1 libsynctex:2016.41290-4 net-tools:1.60.20160710git-1 openjpeg2:2.1.1-2 poppler:0.46.0-2 poppler-glib:0.46.0-2 poppler-qt4:0.46.0-2 poppler-qt5:0.46.0-2 python-setuptools:1:25.1.5-1 python2-setuptools:1:25.1.5-1 texlive-bin:2016.41290-4 texlive-htmlxml:2016.41440-2"
 
 
 import subprocess
@@ -21,7 +21,7 @@ from multiprocessing.managers import BaseManager
 import queue
 import time
 
-f = open("failed2.txt", "w")
+f = open("failed4.txt", "w")
 queue = queue.Queue()
 class QueueManager(BaseManager): pass
 QueueManager.register('get_queue', callable=lambda:queue)

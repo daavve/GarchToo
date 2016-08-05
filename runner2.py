@@ -25,7 +25,7 @@ PWD = subprocess.run(["pwd"], stdout=subprocess.PIPE, universal_newlines=True).s
 
 while(True):
     my_tdir_name = ""
-    cur_pkg = queue.get()
+    cur_pkg = str(queue.get())
     subprocess.run(["yaourt", "-G", cur_pkg], universal_newlines=True)
     built_pkgs = subprocess.run(["ls", "-l"], stdout=subprocess.PIPE, universal_newlines=True).stdout.split("\n")
     for build_pkg in built_pkgs:
