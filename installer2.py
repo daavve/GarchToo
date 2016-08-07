@@ -19,12 +19,6 @@ m = QueueManager(address=('', 50000), authkey=b'abracadabra')
 m.connect()
 queue = m.get_queue()
 
-class Prgram(object):
-    def __init__(self, p_type: str, p_name: str, p_ver: str):
-        self.p_type = p_type
-        self.p_name = p_name
-        self.p_ver = p_ver
-        
 
 def get_name_and_version(pkg_full_name: str):
         minus_dashes = pkg_full_name.split("-")
@@ -35,12 +29,8 @@ def get_name_and_version(pkg_full_name: str):
             if(not minus_dashes[i][0].isdigit()):
                 s_name += "-" + minus_dashes[i]
             else:
-                if(first_digit):
-                    s_ver = minus_dashes[i]
-                    first_digit = False
-                else:
-                    s_ver += "-" + minus_dashes[i]
-        return s_name, s_ver
+                break
+        return s_name
 
 pkg_list = subprocess.run(["pacman", "-Syuv", "--print"], stdout=subprocess.PIPE, universal_newlines=True).stdout
 subprocess.run(["pacman", "-Syuv", "--noconfirm"], universal_newlines=True)
@@ -48,16 +38,15 @@ pkgs = deque()
 for pkg in pkg_list.split("\n"):
     if("pkg.tar.xz" in pkg):
         name_and_version = pkg.split("/x86_64/")[1].split("-x86_64.pkg.tar.xz")[0].split("-any.pkg.tar.xz")[0] #Should probably use the python formatter here
-        s_name, s_version = get_name_and_version(name_and_version)
-        s_type = "update"
-        print(s_name + ":" + s_version)
-        if("local" not in s_type and "linux" not in s_name):  #Don't build stull from the AUR or the Kernel
-            pkgs.append(Prgram(s_type, s_name, s_version))
+        s_name = get_name_and_version(name_and_version)
+        print(s_name)
+        if("linux" not in s_name):  #Don't build stull from the AUR or the Kernel
+            pkgs.append(s_name)
 
 my_dir_name = ""
 while True:
     c_pkg = pkgs.popleft()
-    queue.put(c_pkg.p_name)
+    queue.put(c_pkg)
     time.sleep(1)
     build_return_val = queue.get()
     if(build_return_val == 0):

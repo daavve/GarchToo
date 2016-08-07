@@ -12,7 +12,7 @@ from multiprocessing.managers import BaseManager
 import queue
 import time
 
-f = open("failed5update.txt", "w")
+f = open("failed6update.txt", "w")
 queue = queue.Queue()
 class QueueManager(BaseManager): pass
 QueueManager.register('get_queue', callable=lambda:queue)
@@ -35,6 +35,7 @@ while(True):
     build_results = subprocess.run(["makepkg"], universal_newlines=True)
     os.chdir(PWD)
     queue.put(build_results.returncode)
+    time.sleep(1)
     if(build_results.returncode == 0):
         queue.put(my_dir_name)
         time.sleep(1)
@@ -44,7 +45,7 @@ while(True):
     subprocess.run(["rm", "-Rf", my_dir_name], universal_newlines=True)
     
 f.close()
-queue.close_all()
+
             
         
         
