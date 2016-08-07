@@ -20,25 +20,27 @@ m.connect()
 queue = m.get_queue()
 
 
-def get_name_and_version(pkg_full_name: str):
-        minus_dashes = pkg_full_name.split("-")
-        s_name = minus_dashes[0]
-        s_ver = ""
-        first_digit = True
-        for i in range(1, len(minus_dashes)):
-            if(not minus_dashes[i][0].isdigit()):
-                s_name += "-" + minus_dashes[i]
-            else:
-                break
-        return s_name
+def get_name_and_version(pkg: str):
+    if("/x86_64/" in pkg):
+        pkg = pkg.split("/x86_64/")[1]
+    name_and_version = pkg.split("-x86_64.pkg.tar.xz")[0].split("-any.pkg.tar.xz")[0]
+    minus_dashes = name_and_version.split("-")
+    s_name = minus_dashes[0]
+    s_ver = ""
+    first_digit = True
+    for i in range(1, len(minus_dashes)):
+        if(not minus_dashes[i][0].isdigit()):
+            s_name += "-" + minus_dashes[i]
+        else:
+            break
+    return s_name
 
 pkg_list = subprocess.run(["pacman", "-Syuv", "--print"], stdout=subprocess.PIPE, universal_newlines=True).stdout
 subprocess.run(["pacman", "-Syuv", "--noconfirm"], universal_newlines=True)
 pkgs = deque()
 for pkg in pkg_list.split("\n"):
     if("pkg.tar.xz" in pkg):
-        name_and_version = pkg.split("/x86_64/")[1].split("-x86_64.pkg.tar.xz")[0].split("-any.pkg.tar.xz")[0] #Should probably use the python formatter here
-        s_name = get_name_and_version(name_and_version)
+        s_name = get_name(pkg)
         print(s_name)
         if("linux" not in s_name):  #Don't build stull from the AUR or the Kernel
             pkgs.append(s_name)
@@ -57,7 +59,7 @@ while True:
         for b_pkg in built_pkgs:
             if(".pkg.tar.xz" in b_pkg):
                 subprocess.run(["pacman", "-Uv", "--noconfirm", b_pkg], universal_newlines=True)
-                name = b_pkg.split("-" + c_pkg.p_ver)[0]
+                name = get_name(pkg)
                 for i_pkg in pkgs:
                     if(i_pkg.p_name == name and i_pkg not in rmpkglst):
                         rmpkglst.append(i_pkg)
