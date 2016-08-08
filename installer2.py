@@ -20,7 +20,7 @@ m.connect()
 queue = m.get_queue()
 
 
-def get_name_and_version(pkg: str):
+def get_name(pkg: str):
     if("/x86_64/" in pkg):
         pkg = pkg.split("/x86_64/")[1]
     name_and_version = pkg.split("-x86_64.pkg.tar.xz")[0].split("-any.pkg.tar.xz")[0]

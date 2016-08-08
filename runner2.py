@@ -12,7 +12,7 @@ from multiprocessing.managers import BaseManager
 import queue
 import time
 
-f = open("failed6update.txt", "w")
+f = open("failed7update.txt", "w")
 queue = queue.Queue()
 class QueueManager(BaseManager): pass
 QueueManager.register('get_queue', callable=lambda:queue)
