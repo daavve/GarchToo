@@ -42,8 +42,11 @@ for pkg in pkg_list.split("\n"):
     if("pkg.tar.xz" in pkg):
         s_name = get_name(pkg)
         print(s_name)
-        if("linux" not in s_name):  #Don't build stull from the AUR or the Kernel
+        if("linux-atm" in s_name):  #white-list goes here
             pkgs.append(s_name)
+        else:
+            if("linux" not in s_name):  #black-list goes here
+                pkgs.append(s_name)
 
 my_dir_name = ""
 while True:
