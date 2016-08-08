@@ -48,7 +48,7 @@ for pkg in pkg_list.split("\n"):
 my_dir_name = ""
 while True:
     c_pkg = pkgs.popleft()
-    queue.put(c_pkg)
+    queue.put(str(c_pkg)
     time.sleep(1)
     build_return_val = queue.get()
     if(build_return_val == 0):
