@@ -1,0 +1,67 @@
+installing packages:  Make sure you only install packages listed inside the pkg, not all packages inside the directory
+
+Sometimes: yaourt -G dhclient
+==> Download dhcp sources
+pkgbase=dhcp
+pkgname=('dhcp' 'dhclient')
+
+capture yaourt -G output to make sure you always cd into the correct directory
+
+You will need to yaourt -G while you are in the process of building the dependency tree. That means you might need to re-visit PKGBUILD files to disable packages you don't need
+
+
+
+Many packages that use autotools do not run parallel compilation
+
+might be better to parse the PKGBUILD for dependencies and use that to build a tree, rather than trying to build and then failing then looking at what we are missing.
+
+Also get the package names from the PKGBUILD file,
+
+package file names are ($name-$pkgver-$pkgrel-$architecture.pkg.tar.xz
+
+remember, that sub-packages also have depends and makedepends (Yaourt doesn't handle this correctly I can fix this)
+
+also..... you don't have to install eveything that gets built' especially if dependencies get out of control
+
+also, when you yaourt -G $subpackage, you get the $basepackage and base-directory downloaded instead.  This means you must cd into the #pase-pkg directory
+
+Some packages you build satisfy dependencies of multiple packages up-the-line
+
+more PKGBUILD stuff:
+
+if you have an epoch, then resulting package will be $name-$epoch:$version-$release-$arch.pkg.tar.xz
+The colon might need an escape character to work in the aregument passed to pacman
+
+if you want to you can edit the pkgbuilds so you  don't  build sub-packages you won't install
+
+
+dependencies may also look like this:
+
+perl-spiffy>=0.30
+
+sometimes PKGBUILD file will be kind of wierd.
+
+for example: 
+
+makedepends=(python{,2}-cairo)
+Means that both python-cairo and python2-cairo are needed
+
+the same thing can happen anywhere in the script, for example in the prepare() function
+
+In this case its probably easier to build both python-cairo and python-2 cairo than to re-write much of the pkgbuild
+
+python-cairo, and python2-cairo have 2 distinct PKGBUILDS
+
+Sometimes subpackages built in a single PKGBUILD will depend upon each other
+
+also, keep in mind, sometimes make or make-check will fail.  In that case you need to install it directly.
+
+Also, many times the project will consider a failed build a bug, in that case you might want to save the report and submit a bug report.
+
+Also, might want to re-compile projects with more conservative cflags if compilation fails
+
+Certain packages do not use makepkg cflags:
+
+qt5
+
+both pandoc and twine have extensive dependency requirements.  I think building them woule be a good experiment to verify dependency resolution algorithm
