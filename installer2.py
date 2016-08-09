@@ -63,7 +63,7 @@ while True:
             if(".pkg.tar.xz" in b_pkg):
                 subprocess.run(["pacman", "-Uv", "--noconfirm", b_pkg], universal_newlines=True)
                 name = get_name(pkg)
-                if(name not in pkgs and name not in rmpkglst):
+                if(name in pkgs and name not in rmpkglst):
                     rmpkglst.append(name)
         for rmpkg in rmpkglst:
             pkgs.remove(rmpkg)
