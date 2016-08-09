@@ -17,7 +17,7 @@ class QueueManager(BaseManager): pass
 QueueManager.register('get_queue', callable=lambda:queue)
 m = QueueManager(address=('', 50000), authkey=b'abracadabra')
 m.connect()
-queue = m.get_queue()
+qu = m.get_queue()
 
 
 def get_name(pkg: str):
@@ -51,11 +51,11 @@ for pkg in pkg_list.split("\n"):
 my_dir_name = ""
 while True:
     c_pkg = pkgs.popleft()
-    queue.put(str(c_pkg))
+    qu.put(str(c_pkg))
     time.sleep(1)
-    build_return_val = queue.get()
+    build_return_val = qu.get()
     if(build_return_val == 0):
-        my_dir_name = queue.get()  # get folder name
+        my_dir_name = qu.get()  # get folder name
         os.chdir(PWD + "/" + my_dir_name)
         built_pkgs = subprocess.run(["ls"], stdout=subprocess.PIPE, universal_newlines=True).stdout.split(None)
         rmpkglst = []
@@ -64,9 +64,9 @@ while True:
                 subprocess.run(["pacman", "-Uv", "--noconfirm", b_pkg], universal_newlines=True)
                 name = get_name(pkg)
                 if(name not in pkgs and name not in rmpkglst):
-                    rmpkglst.append(i_pkg)
+                    rmpkglst.append(name)
         for rmpkg in rmpkglst:
             pkgs.remove(rmpkg)
         os.chdir(PWD)
-        queue.put("advance")
+        qu.put("advance")
         time.sleep(1)
