@@ -65,3 +65,8 @@ Certain packages do not use makepkg cflags:
 qt5
 
 both pandoc and twine have extensive dependency requirements.  I think building them woule be a good experiment to verify dependency resolution algorithm
+
+
+Also, sometimes we build packages that when installed hobble the next upgrade like curl-debug, make sure you don't install these
+
+Might also want to install biber stuff 
