@@ -23,6 +23,9 @@ qu = m.get_queue()
 def get_name(pkg: str):
     if("/x86_64/" in pkg):
         pkg = pkg.split("/x86_64/")[1]
+    else:
+        if("/i686" in pkg):
+            pkg = pkg.split("/i686/")[1]
     name_and_version = pkg.split("-x86_64.pkg.tar.xz")[0].split("-any.pkg.tar.xz")[0]
     minus_dashes = name_and_version.split("-")
     s_name = minus_dashes[0]
