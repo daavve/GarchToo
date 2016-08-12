@@ -38,6 +38,9 @@ def get_name(pkg: str):
             break
     return s_name
 
+white_list = ["linux-atm", "libutil-linux", "util-linux", "nvidia-340xx", "nvidia-340xx-utils", "nvidia-340xx-libgl", "opencl-nvidia-340xx"]
+black_list = ["linux"]
+
 pkg_list = subprocess.run(["pacman", "-Syuv", "--print"], stdout=subprocess.PIPE, universal_newlines=True).stdout
 subprocess.run(["pacman", "-Syuv", "--noconfirm"], universal_newlines=True)
 pkgs = deque()
@@ -45,10 +48,10 @@ for pkg in pkg_list.split("\n"):
     if("pkg.tar.xz" in pkg):
         s_name = get_name(pkg)
         print(s_name)
-        if("linux-atm" in s_name):  #white-list goes here
+        if(s_name in white_list):  #white-list goes here
             pkgs.append(s_name)
         else:
-            if("linux" not in s_name):  #black-list goes here
+            if(s_name not in black_list):  #black-list goes here
                 pkgs.append(s_name)
 
 my_dir_name = ""
