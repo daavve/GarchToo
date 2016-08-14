@@ -38,8 +38,8 @@ def get_name(pkg: str):
             break
     return s_name
 
-white_list = ["linux-atm", "libutil-linux", "util-linux", "nvidia-340xx", "nvidia-340xx-utils", "nvidia-340xx-libgl", "opencl-nvidia-340xx"]
-black_list = ["linux"]
+white_list = ["linux-atm", "libutil-linux", "util-linux", "nvidia-340xx"]
+black_list = ["linux", "tesseract-data"]
 
 pkg_list = subprocess.run(["pacman", "-Syuv", "--print"], stdout=subprocess.PIPE, universal_newlines=True).stdout
 subprocess.run(["pacman", "-Syuv", "--noconfirm"], universal_newlines=True)
