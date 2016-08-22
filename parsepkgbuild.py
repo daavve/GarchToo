@@ -9,6 +9,7 @@ class Deps(object):
     def __init__(self, pkg_name: str, pkg_deps: [str]):
         self.pkg_name = pkg_name
         self.pkg_deps = pkg_deps
+        self.child_deps = []
         
 
 import subprocess
