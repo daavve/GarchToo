@@ -42,6 +42,9 @@ for pkg in bld_pkgs:
 # a2ps-4.14-7-x86_64
 # ls:  a2ps-4.14-7-x86_64.pkg.tar.xz
 #
+# These options can be passed to pacman:
+#
+#  --asdeps         Install packages as non-explicitly installed
 #
 #
 #
