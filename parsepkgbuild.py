@@ -46,5 +46,5 @@ for pkg in bld_pkgs:
 #
 #  --asdeps         Install packages as non-explicitly installed
 #
-#
+# Going to have to edit PKGBUILD to remove unneeded packages
 #
