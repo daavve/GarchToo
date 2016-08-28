@@ -33,6 +33,15 @@ for i in range(1, len(built_pkgs) - 1):
     bld_pkgs.append(Deps(pkg_name, bld_pkgs2))
 
 
-#for pkg in bld_pkgs:
-#    print(pkg.pkg_deps)
+for pkg in bld_pkgs:
+    print(pkg.pkg_deps)
         
+#
+#  makepkg --packagelist
+# a2ps-4.14-7-i686
+# a2ps-4.14-7-x86_64
+# ls:  a2ps-4.14-7-x86_64.pkg.tar.xz
+#
+#
+#
+#
